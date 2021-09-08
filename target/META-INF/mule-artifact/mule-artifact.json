@@ -1,0 +1,45 @@
+{
+  "configs": [
+    "globalerrorhandling.xml",
+    "global.xml",
+    "implementation/get.xml",
+    "resource-prac.xml",
+    "implementation/post.xml"
+  ],
+  "secureProperties": [],
+  "redeploymentEnabled": true,
+  "name": "com.mycompany:resourcetype1:1.0.0-SNAPSHOT",
+  "minMuleVersion": "4.3.0-20210622",
+  "requiredProduct": "MULE_EE",
+  "classLoaderModelLoaderDescriptor": {
+    "id": "mule",
+    "attributes": {
+      "exportedPackages": [],
+      "exportedResources": [
+        "api/common/errordataType.raml",
+        "api/common/headertrait.raml",
+        "api/common/querytrait.raml",
+        "api/errorexample/200error.json",
+        "api/errorexample/201error.json",
+        "api/errorexample/404error.json",
+        "api/errorexample/500error.json",
+        "api/library/postdataType.raml",
+        "api/library/postexample.raml",
+        "api/resource type/employee resource type.raml",
+        "api/resource-prac.raml",
+        "api/traits/responcestrait.raml",
+        "dev.yaml",
+        "global.xml",
+        "globalerrorhandling.xml",
+        "implementation/get.xml",
+        "implementation/post.xml",
+        "log4j2.xml",
+        "resource-prac.xml"
+      ]
+    }
+  },
+  "bundleDescriptorLoader": {
+    "id": "mule",
+    "attributes": {}
+  }
+}
