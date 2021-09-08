@@ -1,0 +1,37 @@
+#%RAML 1.0 Library
+traits:
+  header: !include ../common/headertrait.raml
+  query: !include ../common/querytrait.raml
+  error: !include ../traits/responcestrait.raml
+resourceTypes:
+  employee collection:
+    get:
+      is:
+        - error
+        - header
+      description: This is used to fetch <<resourcePathName>>
+      responses:
+        200:
+          body:
+            application/json:
+              example: |
+                 <<exampleReference1>>
+    post:
+      is:
+        - header
+        - error
+        - query
+      description: This is used to create <<resourcePathName>>
+      body:
+        application/json:
+          example: |
+           <<exampleReference2>>
+      responses:
+            200:
+              body:
+                application/json:
+                      example: |
+                       <<exampleReference3>>
+                                 
+            
+                

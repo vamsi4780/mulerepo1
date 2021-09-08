@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:email="http://www.mulesoft.org/schema/mule/email" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
+http://www.mulesoft.org/schema/mule/email http://www.mulesoft.org/schema/mule/email/current/mule-email.xsd">
+	<error-handler name="globalerrorhandling" doc:id="b4aa6f54-892d-4918-9ad4-c66209270feb" >
+		<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="1d2259e4-e767-4d28-bbcc-026b43f9c00f" type="APIKIT:NOT_FOUND">
+			<ee:transform doc:name="Transform Message" doc:id="68370fc6-cc71-4cbf-a664-7d758c090b6b" >
+				<ee:message >
+					<ee:set-payload ><![CDATA[%dw 2.0
+output application/jSON
+---
+{
+	"message": "resource not found"
+}]]></ee:set-payload>
+				</ee:message>
+			</ee:transform>
+		</on-error-propagate>
+		<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="e57fa026-e22e-435a-a345-c1dab22e6f6d" type="APIKIT:BAD_REQUEST">
+			<ee:transform doc:name="Transform Message" doc:id="88d66021-dc80-4a6c-ba62-0721129bff2e" >
+				<ee:message >
+					<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+   "message": "bad request"	
+}]]></ee:set-payload>
+				</ee:message>
+			</ee:transform>
+		</on-error-propagate>
+		<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="e86dcf44-9125-49b7-8b77-c42f59fee975" type="APIKIT:METHOD_NOT_ALLOWED">
+			<ee:transform doc:name="Transform Message" doc:id="8c48e9e2-6433-4055-b5df-1a13f472940d" >
+				<ee:message >
+					<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+	"message": "method not allowed"
+}]]></ee:set-payload>
+				</ee:message>
+			</ee:transform>
+			<email:send doc:name="Send" doc:id="d6e700a5-2aea-459a-83ed-fb67bd3bb556" config-ref="Email_SMTP" fromAddress="lakkyreddyvamsi@gmail.com" subject="mail">
+				<email:to-addresses >
+					<email:to-address value="lakkyreddyvamsi@gmail.com" />
+				</email:to-addresses>
+				<email:body >
+					<email:content ><![CDATA[#['mule error msg']]]></email:content>
+				</email:body>
+				<email:attachments ><![CDATA[#[payload]]]></email:attachments>
+			</email:send>
+		</on-error-propagate>
+		<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="85864fb1-c67b-4bd0-a0ed-6838e9e2c624" type="APIKIT:NOT_ACCEPTABLE">
+			<ee:transform doc:name="Transform Message" doc:id="b107f048-02f4-4196-8ee1-1631d77b2949" >
+				<ee:message >
+					<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+	"message": "not acceptable"
+}]]></ee:set-payload>
+				</ee:message>
+			</ee:transform>
+		</on-error-propagate>
+		<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="2006e27e-34bd-4f5e-8d22-f804b8f8fb41" type="APIKIT:UNSUPPORTED_MEDIA_TYPE">
+			<ee:transform doc:name="Transform Message" doc:id="4c6921c2-ac65-49b0-a587-f50a4abd4d5b" >
+				<ee:message >
+					<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{message: "Unsupported media type"}]]></ee:set-payload>
+				</ee:message>
+			</ee:transform>
+		</on-error-propagate>
+		<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="2c2e7407-53a5-4f40-b681-a8d7e50e30a7" type="APIKIT:NOT_IMPLEMENTED">
+			<ee:transform doc:name="Transform Message" doc:id="52b840b7-fc0e-44f5-ba49-c3a4c5e2c187" >
+				<ee:message >
+					<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{message: "Not Implemented"}]]></ee:set-payload>
+				</ee:message>
+			</ee:transform>
+		</on-error-propagate>
+	</error-handler>
+</mule>

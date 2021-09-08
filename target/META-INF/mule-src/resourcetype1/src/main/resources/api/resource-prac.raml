@@ -1,0 +1,11 @@
+#%RAML 1.0
+title: resource-prac
+uses:
+  resource type: /resource type/employee resource type.raml
+description: this is about employees details
+types:
+  error type: !include common/errordataType.raml
+  postexampletype: !include library/postdataType.raml
+/employees:
+  type: {resource type.employee collection: {exampleReference1: !include /errorexample/200error.json,exampleReference2: !include /library/postexample.raml,exampleReference3: !include /errorexample/200error.json}}
+         
